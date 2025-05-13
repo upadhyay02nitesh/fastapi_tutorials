@@ -21,8 +21,8 @@ async def home():
 
 
 @app.get('/fun')
-async def query_parameter(id:int,emp_id:str):
-    return f"Hello from FastAPI {id} and {emp_id}"
+async def query_parameter(emp_id:str,name:str="KAlua",id:int=None):
+    return f"Hello from FastAPI {id},{name} and {emp_id}"
 
 @app.post('/fun')
 async def add_tea(tea:Tea):
