@@ -5,20 +5,39 @@ Welcome to the FastAPI learning hub! This repository contains multiple hands-on 
 ---
 FASTAPI/
 │
-├── Cache/ # Examples using FastAPI caching
-├── ChatApp_with_websocket/ # Real-time chat app using WebSockets
-├── CRUD_operation_with_db/ # Basic CRUD operations with a database
-├── Handle_CRUD_with_JWT/ # CRUD with JWT-based authentication
-├── middleware/ # Custom middlewares in FastAPI
-├── ratelimiter/ # Rate limiting implementation
-│
-├── app.log # Application logs
-├── readme.md # Documentation (You're reading it!)
-├── Rest_API_FastAPI.py # Basic REST API example with FastAPI
-├── Restapi_mysql.py # REST API using FastAPI and MySQL
-└── test_Rest_API_with_pytest.py # Pytest-based testing for FastAPI
+├── Cache/                     # Examples using FastAPI caching
 
-##
+
+├── ChatApp_with_websocket/   # Real-time chat app using WebSockets
+
+
+├── CRUD_operation_with_db/   # Basic CRUD operations with a database
+
+
+├── Handle_CRUD_with_JWT/     # CRUD with JWT-based authentication
+
+
+├── middleware/               # Custom middlewares in FastAPI
+
+
+├── ratelimiter/              # Rate limiting implementation
+
+
+│
+├── app.log                   # Application logs
+
+
+├── readme.md                 # Documentation (You're reading it!)
+
+
+├── Rest_API_FastAPI.py       # Basic REST API example with FastAPI
+
+
+├── Restapi_mysql.py          # REST API using FastAPI and MySQL
+
+
+└── test_Rest_API_with_pytest.py  # Pytest-based testing for FastAPI
+
 ---
 
 ## 📦 Requirements
