@@ -4,6 +4,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker,Session
 
+
 # Initialize FastAPI app
 app = FastAPI()
 
@@ -17,6 +18,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base model for SQLAlchemy
 Base = declarative_base()
+
+
 
 # Define the model (table structure)
 class Tea(Base):
