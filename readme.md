@@ -4,7 +4,11 @@ Welcome to the FastAPI learning hub! This repository contains multiple hands-on 
 
 ---
 
-## 🧠 Project Structure
+##
+---
+
+## 📦 Requirements
+ 🧠 Project Structure
 
 FASTAPI/
 │
@@ -21,10 +25,6 @@ FASTAPI/
 ├── Restapi_mysql.py # REST API using FastAPI and MySQL
 └── test_Rest_API_with_pytest.py # Pytest-based testing for FastAPI
 
-
----
-
-## 📦 Requirements
 
 To get started, install the dependencies:
 
