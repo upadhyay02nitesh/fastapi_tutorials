@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WhatsApp Style Group Chat</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ece5dd;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 400px;
+      height: 500px;
+      background: orangered;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #075e54;
+      color: orange;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: #ece5dd;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      max-width: 70%;
+      margin: 5px 10px;
+      padding: 10px 15px;
+      border-radius: 7.5px;
+      font-size: 14px;
+      line-height: 1.3;
+      word-wrap: break-word;
+      clear: both;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .message.sent {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      flex-direction: row-reverse;
+    }
+    .message.received {
+      background-color: white;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      flex-direction: row;
+    }
+    .username {
+      font-weight: bold;
+      font-size: 13px;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .message-text {
+      flex: 1;
+    }
+    .profile-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #25d366;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 14px;
+      user-select: none;
+      flex-shrink: 0;
+      box-shadow: 0 0 3px rgba(0,0,0,0.2);
+    }
+    .input-area {
+      display: flex;
+      border-top: 1px solid #ddd;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+    #messageInput {
+      flex-grow: 1;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+    #sendBtn {
+      background-color: #25d366;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 0 20px;
+      margin-left: 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #sendBtn:hover {
+      background-color: #128c4a;
+    }
+    .chat-header {
+  background-color: #075e54;
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between; /* title left, profile right */
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  user-select: none;
+}
+
+.profile-logo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+.input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f0f0f0;
+  align-items: center;
+  gap: 10px;
+}
+
+#messageInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* WhatsApp style paperclip icon */
+#uploadLabel {
+  width: 36px;
+  height: 36px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Paperclip_icon_font_awesome.svg');
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  filter: invert(40%) sepia(84%) saturate(417%) hue-rotate(96deg) brightness(95%) contrast(88%);
+  border-radius: 50%;
+  transition: filter 0.3s ease;
+}
+
+#uploadLabel:hover {
+  filter: invert(34%) sepia(92%) saturate(2973%) hue-rotate(190deg) brightness(95%) contrast(85%);
+}
+
+
+#sendBtn {
+  background-color: #25d366;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#sendBtn:hover {
+  background-color: #128c4a;
+}
+
+  </style>
+  
+</head>
+<body><div class="chat-container">
+  <div class="chat-header">
+    FastAPI Group Chat
+    <div class="profile-info">
+      <div class="profile-logo" id="headerLogo"></div>
+      <span id="headerUsername"></span>
+    </div>
+  </div>
+  <div id="messages"></div>
+  <div class="input-area" style="display: flex; align-items: center; border-top: 1px solid #ddd; padding: 10px; background-color: #fff8f0;">
+    <input 
+      type="text" 
+      id="messageInput" 
+      placeholder="Type a message" 
+      autocomplete="off" 
+      style="flex-grow: 1; padding: 10px 15px; font-size: 16px; border-radius: 20px; border: 1px solid #f39c12; outline: none; color: #e67e22;"
+    />
+
+    <!-- File upload button styled as orange WhatsApp paperclip -->
+    <label 
+      for="fileInput" 
+      id="uploadLabel" 
+      title="Upload a file" 
+      style="cursor: pointer; margin-left: 10px; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background-color: #e67e22; transition: background-color 0.3s;"
+      onmouseover="this.style.backgroundColor='#f0f0f0';"
+      onmouseout="this.style.backgroundColor='#e67e22';"
+    >
+      <!-- Paperclip SVG icon in white -->
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           width="20" height="20" 
+           fill="white" 
+           viewBox="0 0 24 24" 
+           stroke="none"
+           >
+        <path d="M16.5 6.5L7 16a3.5 3.5 0 0 1-5-5l9-9a4.5 4.5 0 1 1 6.364 6.364l-9.1 9.1a2 2 0 0 1-2.828-2.828l8.48-8.48" stroke="none" fill="white"/>
+      </svg>
+    </label>
+    <input type="file" id="fileInput" style="display:none;" />
+
+    <button 
+      id="sendBtn" 
+      style="background-color: #e67e22; border: none; color: white; font-weight: bold; font-size: 16px; padding: 0 20px; margin-left: 10px; border-radius: 20px; cursor: pointer; transition: background-color 0.3s;"
+      onmouseover="this.style.backgroundColor='#d35400';"
+      onmouseout="this.style.backgroundColor='#e67e22';"
+    >
+      Send
+    </button>
+  </div>
+</div>
+
+
+
+<script>
+  let username = prompt("Enter your name:") || "Anonymous";
+  const ws = new WebSocket("ws://localhost:8000/ws/" + username);
+
+  const messagesDiv = document.getElementById("messages");
+  const input = document.getElementById("messageInput");
+  const sendBtn = document.getElementById("sendBtn");
+
+  // Generate initials from username
+  function getInitials(name) {
+    return name.split(' ').map(n => n[0].toUpperCase()).join('').slice(0, 2);
+  }
+
+  // Set header profile logo and username text
+  const headerLogo = document.getElementById("headerLogo");
+  const headerUsername = document.getElementById("headerUsername");
+
+  if (headerLogo && headerUsername) {
+    headerLogo.innerText = getInitials(username);
+    headerUsername.innerText = username;
+  }
+
+  // Add message bubble to chat with profile logo and username
+  function addMessage(usernameMsg, msg) {
+    const msgDiv = document.createElement("div");
+    msgDiv.classList.add("message");
+    if (usernameMsg === username) {
+      msgDiv.classList.add("sent");
+    } else {
+      msgDiv.classList.add("received");
+    }
+
+    const profileLogo = document.createElement("div");
+    profileLogo.classList.add("profile-logo");
+    profileLogo.innerText = getInitials(usernameMsg);
+
+    const usernameSpan = document.createElement("div");
+    usernameSpan.classList.add("username");
+    usernameSpan.innerText = usernameMsg;
+
+    const textSpan = document.createElement("div");
+    textSpan.classList.add("message-text");
+    textSpan.innerText = msg;
+
+    if (msgDiv.classList.contains("sent")) {
+      // sent: order text, username, logo from right to left
+      msgDiv.appendChild(textSpan);
+      msgDiv.appendChild(usernameSpan);
+      msgDiv.appendChild(profileLogo);
+    } else {
+      // received: order logo, username, text from left to right
+      msgDiv.appendChild(profileLogo);
+      msgDiv.appendChild(usernameSpan);
+      msgDiv.appendChild(textSpan);
+    }
+
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to bottom
+  }
+
+  ws.onmessage = function(event) {
+    const fullMsg = event.data; // format: "username: message"
+    const sepIndex = fullMsg.indexOf(":");
+    if (sepIndex !== -1) {
+      const sender = fullMsg.slice(0, sepIndex).trim();
+      const message = fullMsg.slice(sepIndex + 1).trim();
+      addMessage(sender, message);
+    }
+  };
+
+  function sendMessage() {
+    if (input.value.trim() === "") return;
+    ws.send(input.value);
+    input.value = "";
+  }
+
+  sendBtn.onclick = sendMessage;
+  input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  });
+</script>
+
+</body>
+</html>

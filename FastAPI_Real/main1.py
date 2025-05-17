@@ -2,9 +2,9 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
 from db_connection import SessionLocal,engine   
-from model import Base, Tea
+from model import Base, Tea,DeletedTea
 from schema import TeaCreate
-
+from datetime import datetime
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -54,6 +54,13 @@ async def delete_tea(tea_id: int, db: Session = Depends(get_db)):
     db_tea = db.query(Tea).filter(Tea.id == tea_id).first()
     if db_tea is None:
         raise HTTPException(status_code=404, detail="Tea not found")
+    deleted_record = DeletedTea(
+        tea_id=db_tea.id,
+        name=db_tea.name,
+        salary=db_tea.salary,
+        deleted_at=datetime.utcnow()
+    )
+    db.add(deleted_record)
     db.delete(db_tea)
     db.commit()
     return {"message": f"User {tea_id} deleted successfully"}
