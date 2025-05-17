@@ -3,13 +3,6 @@
 Welcome to the FastAPI learning hub! This repository contains multiple hands-on mini-projects and examples to help you understand and implement FastAPI with various features such as CRUD operations, WebSocket communication, JWT authentication, rate limiting, and more.
 
 ---
-
-##
----
-
-## 📦 Requirements
- 🧠 Project Structure
-
 FASTAPI/
 │
 ├── Cache/ # Examples using FastAPI caching
@@ -24,6 +17,13 @@ FASTAPI/
 ├── Rest_API_FastAPI.py # Basic REST API example with FastAPI
 ├── Restapi_mysql.py # REST API using FastAPI and MySQL
 └── test_Rest_API_with_pytest.py # Pytest-based testing for FastAPI
+
+##
+---
+
+## 📦 Requirements
+ 🧠 Project Structure
+
 
 
 To get started, install the dependencies:
